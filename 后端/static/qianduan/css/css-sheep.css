@@ -1,0 +1,46 @@
+.form-control-ipt {
+    width: 200px;
+    float: left;
+    margin-left: 10px;
+}
+
+.left-ipt {
+    float: left;
+    line-height: 40px;
+    margin-left: 30px;
+}
+
+.form-search {
+    text-align: left;
+    width: 90%;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.form-search button {
+    float: left;
+    margin-left: 30px;
+}
+
+
+.comment-meta {
+    font-size: 0.875rem; /* 稍微减小元数据的字体大小 */
+    color: #6c757d; /* 使用灰色调 */
+}
+
+.comment-content {
+    margin-top: 0.5rem; /* 增加评论内容和元数据之间的间距 */
+}
+
+.comment-list .list-group-item {
+    padding: 1rem; /* 增加列表项的内边距 */
+    border-bottom: 1px solid #ddd; /* 添加底部边框 */
+}
+
+.comment-form {
+    margin-top: 2rem; /* 增加表单和评论列表之间的间距 */
+}
+
+.pl_textarea {
+    width: 100%;
+}

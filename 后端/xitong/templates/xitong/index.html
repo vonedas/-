@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>首页</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap"
+          rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="/static/qianduan/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/qianduan/css/css.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-store mr-2"></i>现代化商城</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            {% include "xitong/qtmenu.html" %}
+        </div>
+    </div>
+</nav>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>精选商品，品质保证</h5>
+                <p>探索我们的精选商品，享受优质购物体验</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>新品上市，限时优惠</h5>
+                <p>最新商品现已上线，限时优惠不容错过</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="https://via.placeholder.com/1200x400" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>会员专享，独家福利</h5>
+                <p>成为我们的会员，享受更多独家优惠和服务</p>
+            </div>
+        </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> <span
+            class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">上一张</span> </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> <span
+            class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">下一张</span> </a>
+</div>
+
+<div class="container mt-5" qw-areaitemnum="6" qw-c="imagearea">
+    <h2 class="section-title" qw-c="areatitle">公告最新推荐</h2>
+    <div class="row">
+
+        {% for item in noticezuixin6 %}
+            <div class="col-md-4 mb-4 spitem" qw-c="entity">
+                <div class="card">
+                    <img src="/static/upload/{{ item.pic }}" class="card-img-top" alt="..." qw-c="entityimage">
+                    <div class="card-body">
+                        <h5 class="card-title" qw-c="entitytitle">{{ item.name }}</h5>
+                        <p class="card-text">精致设计，彰显品味</p>
+                        <a href="/notice/noticedetails/{{ item.id }}" class="btn btn-primary">查看详情</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+
+<footer class="footer mt-5">
+    <div class="container text-center">
+        <span>© 2023 现代化商城. 保留所有权利。</span>
+    </div>
+</footer>
+<script src="/static/qianduan/js/jquery-3.5.1.slim.min.js"></script>
+<script src="/static/qianduan/js/popper.min.js"></script>
+<script src="/static/qianduan/js/bootstrap.min.js"></script>
+<script>
+    if ("") {
+        alert("");
+    }
+</script>
+</body>
+</html>
+
+

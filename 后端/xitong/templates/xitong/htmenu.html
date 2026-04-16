@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>菜单栏</title>
+    <style>
+        .sidebar-menu {
+            background: #fff;
+            height: 100%;
+            width: 240px;
+            padding: 24px 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        .menu-header {
+            padding: 0 24px 24px 24px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .menu-header h3 {
+            color: #1a1a1a;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+        }
+        .sidebar-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar-menu li {
+            margin: 2px 0;
+        }
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            color: #595959;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        .sidebar-menu a:hover {
+            color: #6B8DE3;
+            background: rgba(107, 141, 227, 0.08);
+        }
+        .sidebar-menu a.active {
+            color: #6B8DE3;
+            background: rgba(107, 141, 227, 0.08);
+        }
+        .sidebar-menu i {
+            width: 24px;
+            margin-right: 12px;
+            font-size: 24px;
+        }
+        .sidebar-menu .nav-text {
+            flex: 1;
+        }
+        .sidebar-menu ul ul {
+            background: #fafafa;
+            margin: 0;
+            display: none;
+            position: relative;
+            padding: 4px 0;
+        }
+        .sidebar-menu ul ul::before {
+            content: '';
+            position: absolute;
+            left: 32px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: #f0f0f0;
+        }
+        .sidebar-menu ul ul a {
+            padding: 10px 24px 10px 64px;
+            font-size: 15px;
+            color: #737373;
+            position: relative;
+        }
+        .sidebar-menu ul ul a::before {
+            content: '';
+            position: absolute;
+            left: 32px;
+            top: 50%;
+            width: 20px;
+            height: 1px;
+            background: #f0f0f0;
+        }
+        .sidebar-menu ul ul a:hover {
+            color: #6B8DE3;
+            background: rgba(107, 141, 227, 0.05);
+        }
+        .sidebar-menu ul ul a:hover::before {
+            background: #6B8DE3;
+        }
+        .has-arrow {
+            position: relative;
+        }
+        .has-arrow::after {
+            content: "";
+            position: absolute;
+            right: 24px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 6px;
+            height: 6px;
+            border-right: 2px solid #bfbfbf;
+            border-bottom: 2px solid #bfbfbf;
+            transform-origin: center;
+            transition: all 0.2s ease;
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .has-arrow[aria-expanded="true"]::after {
+            transform: translateY(-50%) rotate(-135deg);
+        }
+        .sidebar-menu li.active > a {
+            color: #6B8DE3;
+            background: rgba(107, 141, 227, 0.08);
+        }
+        .sidebar-menu li.active > ul {
+            display: block;
+        }
+        .sidebar-menu li.active > a.has-arrow::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #6B8DE3;
+            border-radius: 0 4px 4px 0;
+        }
+        .sidebar-menu ul ul a.active::before {
+            background: #6B8DE3;
+        }
+        .sidebar-menu img {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            vertical-align: middle;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.2s ease;
+        }
+        .sidebar-menu a:hover img,
+        .sidebar-menu a.active img,
+        .sidebar-menu li.active > a img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+{% if request.session.identity == '管理员' %}
+    <div class="sidebar-menu">
+        <div class="menu-header">
+            <h3>健行无忧</h3>
+        </div>
+        <ul>
+            <li>
+                <a href="{% url 'loginAndRegist:adminindex' %}">
+                    <img src="/static/img/个人中心.png">
+                    <span class="nav-text">个人中心</span>
+                </a>
+            </li>
+
+             <li>
+                <a href="{% url 'loginAndRegist:keshihua' %}">
+                    <img src="/static/img/个人中心.png">
+                    <span class="nav-text">可视化</span>
+                </a>
+            </li>
+
+            <li>
+                <a class="has-arrow" href="javascript:void()">
+                    <img src="/static/img/管理员.png">
+                    <span class="nav-text">管理员管理</span>
+                </a>
+                <ul>
+                    <li><a href="{% url 'admin:addadmin' %}">添加管理员</a></li>
+                    <li><a href="{% url 'admin:adminmanage' %}">管理员管理</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a class="has-arrow" href="javascript:void()">
+                    <img src="/static/img/个人中心.png">
+                    <span class="nav-text">用户管理</span>
+                </a>
+                <ul>
+                    <li><a href="{% url 'user:adduser' %}">添加用户</a></li>
+                    <li><a href="{% url 'user:usermanage' %}">用户管理</a></li>
+                </ul>
+            </li>
+
+{#           <li>#}
+{#                <a class="has-arrow" href="javascript:void()">#}
+{#                    <img src="/static/img/子女.png">#}
+{#                    <span class="nav-text">子女管理</span>#}
+{#                </a>#}
+{#                <ul>#}
+{#                    <li><a href="{% url 'zinv:addzinv' %}">添加子女</a></li>#}
+{#                    <li><a href="{% url 'zinv:zinvmanage' %}">子女管理</a></li>#}
+{#                </ul>#}
+{#            </li>#}
+
+            <li>
+                <a class="has-arrow" href="javascript:void()">
+                    <img src="/static/img/文章分类.png">
+                    <span class="nav-text">文章分类管理</span>
+                </a>
+                <ul>
+                    <li><a href="{% url 'articletype:addarticletype' %}">添加文章分类</a></li>
+                    <li><a href="{% url 'articletype:articletypemanage' %}">文章分类管理</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a class="has-arrow" href="javascript:void()">
+                    <img src="/static/img/文章.png">
+                    <span class="nav-text">文章管理</span>
+                </a>
+                <ul>
+                    <li><a href="{% url 'article:addarticle' %}">添加文章</a></li>
+                    <li><a href="{% url 'article:articlemanage' %}">文章管理</a></li>
+                     <li><a href="{% url 'articlecomment:articlecommentmanage' %}">文章评论管理</a></li>
+                </ul>
+            </li>
+
+
+
+            <li>
+                <a class="has-arrow" href="javascript:void()">
+                    <img src="/static/img/公告.png">
+                    <span class="nav-text">公告管理</span>
+                </a>
+                <ul>
+                    <li><a href="{% url 'notice:addnotice' %}">添加公告</a></li>
+                    <li><a href="{% url 'notice:noticemanage' %}">公告管理</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="{% url 'loginAndRegist:tuichuxitong' %}">
+                    <img src="/static/img/退出系统.png">
+                    <span class="nav-text">退出系统</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为所有带有 has-arrow 类的链接添加点击事件
+            const menuItems = document.querySelectorAll('.has-arrow');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const parent = this.parentElement;
+                    
+                    // 关闭其他打开的菜单
+                    const activeItems = document.querySelectorAll('.sidebar-menu li.active');
+                    activeItems.forEach(activeItem => {
+                        if (activeItem !== parent) {
+                            activeItem.classList.remove('active');
+                            const arrow = activeItem.querySelector('.has-arrow');
+                            if (arrow) {
+                                arrow.setAttribute('aria-expanded', 'false');
+                            }
+                        }
+                    });
+
+                    // 切换当前菜单的状态
+                    parent.classList.toggle('active');
+                    this.setAttribute('aria-expanded', parent.classList.contains('active'));
+                });
+            });
+
+            // 根据当前页面URL高亮对应的菜单项
+            const currentPath = window.location.pathname;
+            const menuLinks = document.querySelectorAll('.sidebar-menu a');
+            menuLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPath) {
+                    link.classList.add('active');
+                    let parent = link.parentElement;
+                    while (parent && !parent.classList.contains('sidebar-menu')) {
+                        if (parent.tagName === 'LI') {
+                            parent.classList.add('active');
+                            const arrow = parent.querySelector('.has-arrow');
+                            if (arrow) {
+                                arrow.setAttribute('aria-expanded', 'true');
+                            }
+                        }
+                        parent = parent.parentElement;
+                    }
+                }
+            });
+        });
+    </script>
+{% endif %}
+</body>
+</html>
+
+

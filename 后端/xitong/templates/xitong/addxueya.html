@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title qw-c="operationname">添加血压</title>
+    <!-- Favicon icon -->
+    <!-- Custom Stylesheet -->
+    <link href="/static/houtai/static/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="/static/houtai/static/css/style.css" rel="stylesheet">
+</head>
+<body>
+<!--*******************
+  Preloader start
+********************-->
+<div id="preloader">
+    <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+    </div>
+</div>
+<!--*******************
+  Preloader end
+********************-->
+<!--**********************************
+  Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+    <!--**********************************
+                 Nav header start
+             ***********************************-->
+    <div class="nav-header">
+          <a class="brand-logo" href="#"> <span
+                style="color: white; font-size: 30px;margin-left: 45px;white-space: nowrap">健康检测系统</span> </a>
+        <div class="nav-control">
+            <div class="hamburger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </div>
+    <!--**********************************
+                 Nav header end
+             ***********************************-->
+    <!--**********************************
+                 Header start
+             ***********************************-->
+    <div class="header">
+        <div class="header-content">
+            <nav class="navbar navbar-expand">
+                <div class="collapse navbar-collapse justify-content-between">
+                    <ul class="navbar-nav header-right">
+                        <li class="nav-item dropdown notification_dropdown"><a class="nav-link bell ai-icon"
+                                                                               data-toggle="dropdown" href="#"
+                                                                               role="button">
+                            <svg class="feather feather-bell" fill="none" height="20" id="icon-user"
+                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                 viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
+                            </svg>
+                        </a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!--**********************************
+                 Header end ti-comment-alt
+             ***********************************-->
+    <!--**********************************
+                 Sidebar start
+             ***********************************-->
+    <div class="dlabnav">
+        <div class="dlabnav-scroll">
+
+            {% include "xitong/htmenu.html" %}
+
+        </div>
+    </div>
+    <!--**********************************
+                 Sidebar end
+             ***********************************-->
+    <!--**********************************
+                 Content body start
+             ***********************************-->
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="row page-titles mx-0">
+                <div class="col-sm-6 p-md-0">
+                    <div class="welcome-text">
+                        <h4 qw-c="operationname">添加血压</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card" qw-c="pagecontent">
+                        <div class="card-header">
+                            <h4 class="card-title" qw-c="operationname">添加血压</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-validation">
+                                <form action="{% url 'xueya:addxueyaact' %}" class="form-valide" method="post"
+                                      qw-c="operationform" enctype="multipart/form-data">
+                                    <div class="form-group row" qw-c="formselectcomponent">
+                                        <label class="col-lg-4 col-form-label" for="val-username" qw-c="formselecttext">用户</label>
+                                        <div class="col-lg-6">
+                                            <!-- 定义用户下拉框 -->
+
+                                            <select id='user' onchange="userchange(this)" name="user" id='user'
+                                                    onchange="userchange(this)" name="user" class="form-control"
+                                                    qw-c="formselect">
+                                                {% for user in userall %}
+                                                    <option value='{{ user.name }}'>{{ user.name }}</option>
+
+                                                {% endfor %}                                                </select>
+                                            <script>
+                                                function GetQueryString(name) {
+                                                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                                                    var r = decodeURIComponent(window.location.search.substr(1)).match(reg);
+                                                    if (r != null) return (r[2]);
+                                                    return null;
+                                                }
+
+                                                var user = GetQueryString("user");
+
+                                                if (user != null) {
+
+                                                    $("#user").val(user);
+
+                                                    $("#user option:selected").siblings().remove();
+                                                }
+
+                                                function userchange() {
+
+                                                    // 获取页面加载时的选中option的索引
+                                                    var selectedIndex = $("#user").get(0).selectedIndex;
+
+                                                    $("#userid").val($("#userid option:eq(" + selectedIndex + ")").val());
+
+                                                }
+                                            </script>
+                                        </div>
+                                    </div> <!-- 设置display为none,设置为不可见 -->
+
+                                    <div style='display:none;' class="form-group row" qw-c="formselectcomponent">
+                                        <label class="col-lg-4 col-form-label" for="val-username" qw-c="formselecttext">用户id</label>
+                                        <!-- 设置display为none,设置为不可见 -->
+
+                                        <div style='display:none;' class="col-lg-6">
+                                            <!-- 定义用户id下拉框 -->
+
+                                            <select id='userid' onchange="userchange(this)" name="userid" id='userid'
+                                                    onchange="userchange(this)" name="userid" class="form-control"
+                                                    qw-c="formselect">
+                                                {% for user in userall %}
+                                                    <option value='{{ user.id }}'>{{ user.id }}</option>
+
+                                                {% endfor %}                                                </select>
+                                            <script>
+                                                function GetQueryString(name) {
+                                                    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+                                                    var r = decodeURIComponent(window.location.search.substr(1)).match(reg);
+                                                    if (r != null) return (r[2]);
+                                                    return null;
+                                                }
+
+                                                var userid = GetQueryString("userid");
+
+                                                if (userid != null) {
+
+                                                    $("#userid").val(userid);
+
+                                                    $("#userid option:selected").siblings().remove();
+                                                }
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" qw-c="forminputcomponent">
+                                        <label class="col-lg-4 col-form-label" for="val-username" qw-c="forminputtext">数值</label>
+                                        <div class="col-lg-6">
+                                            <!-- 定义shuzhi输入框 -->
+
+                                            <input name="shuzhi" class="form-control" qw-c="forminput">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" qw-c="formselectcomponent">
+                                        <label class="col-lg-4 col-form-label" for="val-username" qw-c="formselecttext">类型</label>
+                                        <div class="col-lg-6">
+                                            <!-- 定义类型下拉框 -->
+
+                                            <select id='leixing' onchange="早晨change(this)" name="leixing"
+                                                    class="form-control" qw-c="formselect">
+                                                <option>早晨</option>
+                                                <option>中午</option>
+                                                <option>傍晚</option>
+                                                <option>夜晚</option>
+                                            </select><!-- 给select赋值 -->
+
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" qw-c="forminputcomponent">
+                                        <label class="col-lg-4 col-form-label" for="val-username" qw-c="forminputtext">时间</label>
+                                        <div class="col-lg-6">
+                                            <!-- 将id为dangqianshijian的项内容设置为当前时间-->
+
+                                            <script>
+                                                $(function () {
+                                                    document.getElementById("dangqianshijian").value = new Date(+new Date() + 8 * 3600 * 1000).toJSON().substr(0, 19).replace("T", " ");
+                                                })
+                                            </script>
+                                            <!-- 定义id为dangqianshijian的input输入框，并设置为只读-->
+
+                                            <input readonly type="text" id="dangqianshijian" name="shijian"
+                                                   class="form-control" qw-c="forminput">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <div class="col-lg-8 ml-auto">
+                                            <button class="btn btn-primary" qw-c="operationbutton"
+                                                    type="submit">添加
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--**********************************
+                 Content body end
+             ***********************************-->
+    <!--**********************************
+                 Footer start
+             ***********************************-->
+    <div class="footer">
+        <div class="copyright">
+            <p>健康检测系统</p>
+        </div>
+    </div>
+    <!--**********************************
+                 Footer end
+             ***********************************-->
+    <!--**********************************
+                Support ticket button start
+             ***********************************-->
+    <!--**********************************
+                Support ticket button end
+             ***********************************-->
+</div>
+<!--**********************************
+  Main wrapper end
+***********************************-->
+<!--**********************************
+  Scripts
+***********************************-->
+<!-- Required vendors -->
+<script src="/static/houtai/static/js/global.min.js"></script>
+<script src="/static/houtai/static/js/bootstrap-select.min.js"></script>
+<script src="/static/houtai/static/js/custom.min.js"></script>
+<script src="/static/houtai/static/js/dlabnav-init.js"></script>
+<!-- Jquery Validation -->
+<script src="/static/houtai/static/js/jquery.validate.min.js"></script>
+<!-- Form validate init -->
+<script src="/static/houtai/static/js/jquery.validate-init.js"></script>
+<!-- Svganimation scripts -->
+<script src="/static/houtai/static/js/vivus.min.js"></script>
+<script src="/static/houtai/static/js/svg.animation.js"></script>
+<script src="/static/houtai/static/js/styleSwitcher.js"></script>
+<script>
+    if ("") {
+        alert("");
+    }
+</script>
+</body>
+</html>
+
+

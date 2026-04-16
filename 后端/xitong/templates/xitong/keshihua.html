@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title qw-c="operationname">可视化</title>
+    <!-- Favicon icon -->
+    <!-- Custom Stylesheet -->
+    <link href="/static/houtai/static/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="/static/houtai/static/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        .chart-container {
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .chart-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #344767;
+            margin-bottom: 20px;
+        }
+        .chart {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<!--*******************
+  Preloader start
+********************-->
+<div id="preloader">
+    <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+    </div>
+</div>
+<!--*******************
+  Preloader end
+********************-->
+<!--**********************************
+  Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+    <!--**********************************
+                 Nav header start
+             ***********************************-->
+    <div class="nav-header">
+          <a class="brand-logo" href="#"> <span
+                style="color: white; font-size: 30px;margin-left: 45px;white-space: nowrap">健康检测系统</span> </a>
+        <div class="nav-control">
+            <div class="hamburger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="header">
+        <div class="header-content">
+            <nav class="navbar navbar-expand">
+                <div class="collapse navbar-collapse justify-content-between">
+                    <ul class="navbar-nav header-right">
+                        <li class="nav-item dropdown notification_dropdown"><a class="nav-link bell ai-icon"
+                                                                               data-toggle="dropdown" href="#"
+                                                                               role="button">
+                            <svg class="feather feather-bell" fill="none" height="20" id="icon-user"
+                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                 viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
+                            </svg>
+                        </a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="dlabnav">
+        <div class="dlabnav-scroll">
+
+            {% include "xitong/htmenu.html" %}
+
+        </div>
+    </div>
+
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="row page-titles mx-0">
+                <div class="col-sm-6 p-md-0">
+                    <div class="welcome-text">
+                        <h4 qw-c="operationname">可视化</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card" qw-c="pagecontent">
+                        <div class="card-header">
+                            <h4 class="card-title" qw-c="operationname">可视化</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- 文章分类分布 -->
+                                <div class="col-md-6">
+                                    <div class="chart-container">
+                                        <div class="chart-title">文章分类分布</div>
+                                        <div id="articleCategoryChart" class="chart"></div>
+                                    </div>
+                                </div>
+                                <!-- 用户状态分布 -->
+                                <div class="col-md-6">
+                                    <div class="chart-container">
+                                        <div class="chart-title">用户状态分布</div>
+                                        <div id="userStatusChart" class="chart"></div>
+                                    </div>
+                                </div>
+                                <!-- 健康记录趋势 -->
+                                <div class="col-md-12">
+                                    <div class="chart-container">
+                                        <div class="chart-title">近7天健康记录趋势</div>
+                                        <div id="healthTrendChart" class="chart"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--**********************************
+                 Content body end
+             ***********************************-->
+    <!--**********************************
+                 Footer start
+             ***********************************-->
+    <div class="footer">
+        <div class="copyright">
+            <p>健康检测系统</p>
+        </div>
+    </div>
+    <!--**********************************
+                 Footer end
+             ***********************************-->
+    <!--**********************************
+                Support ticket button start
+             ***********************************-->
+    <!--**********************************
+                Support ticket button end
+             ***********************************-->
+</div>
+<!--**********************************
+  Main wrapper end
+***********************************-->
+<!--**********************************
+  Scripts
+***********************************-->
+<!-- Required vendors -->
+<script src="/static/houtai/static/js/global.min.js"></script>
+<script src="/static/houtai/static/js/bootstrap-select.min.js"></script>
+<script src="/static/houtai/static/js/custom.min.js"></script>
+<script src="/static/houtai/static/js/dlabnav-init.js"></script>
+<!-- Jquery Validation -->
+<script src="/static/houtai/static/js/jquery.validate.min.js"></script>
+<!-- Form validate init -->
+<script src="/static/houtai/static/js/jquery.validate-init.js"></script>
+<!-- Svganimation scripts -->
+<script src="/static/houtai/static/js/vivus.min.js"></script>
+<script src="/static/houtai/static/js/svg.animation.js"></script>
+<script src="/static/houtai/static/js/styleSwitcher.js"></script>
+<script>
+    if ("") {
+        alert("");
+    }
+
+    // 初始化所有图表
+    function initCharts() {
+        // 文章分类分布图表
+        const articleCategoryChart = echarts.init(document.getElementById('articleCategoryChart'));
+        // 用户状态分布图表
+        const userStatusChart = echarts.init(document.getElementById('userStatusChart'));
+        // 健康记录趋势图表
+        const healthTrendChart = echarts.init(document.getElementById('healthTrendChart'));
+
+        // 获取文章分类数据
+        fetch('/loginAndRegist/getArticleCategories')
+            .then(response => response.json())
+            .then(data => {
+                const option = {
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: '{a} <br/>{b}: {c} ({d}%)'
+                    },
+                    legend: {
+                        orient: 'vertical',
+                        right: 10,
+                        top: 'center'
+                    },
+                    series: [{
+                        name: '文章分类',
+                        type: 'pie',
+                        radius: ['40%', '70%'],
+                        avoidLabelOverlap: false,
+                        itemStyle: {
+                            borderRadius: 10,
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        },
+                        label: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            label: {
+                                show: true,
+                                fontSize: '20',
+                                fontWeight: 'bold'
+                            }
+                        },
+                        labelLine: {
+                            show: false
+                        },
+                        data: data
+                    }]
+                };
+                articleCategoryChart.setOption(option);
+            });
+
+        // 获取用户状态数据
+        fetch('/loginAndRegist/getUserStatus')
+            .then(response => response.json())
+            .then(data => {
+                const option = {
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    legend: {
+                        bottom: '5%',
+                        left: 'center'
+                    },
+                    series: [{
+                        name: '用户状态',
+                        type: 'pie',
+                        radius: '50%',
+                        data: data,
+                        emphasis: {
+                            itemStyle: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }]
+                };
+                userStatusChart.setOption(option);
+            });
+
+        // 获取健康记录趋势数据
+        fetch('/loginAndRegist/getHealthTrend')
+            .then(response => response.json())
+            .then(data => {
+                const option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['正常记录', '异常记录'],
+                        bottom: 0
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '10%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'category',
+                        boundaryGap: false,
+                        data: data.dates
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        name: '正常记录',
+                        type: 'line',
+                        stack: 'Total',
+                        areaStyle: {},
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: data.normal
+                    }, {
+                        name: '异常记录',
+                        type: 'line',
+                        stack: 'Total',
+                        areaStyle: {},
+                        emphasis: {
+                            focus: 'series'
+                        },
+                        data: data.abnormal
+                    }]
+                };
+                healthTrendChart.setOption(option);
+            });
+    }
+
+    // 页面加载完成后初始化图表
+    window.addEventListener('load', initCharts);
+
+    // 窗口大小改变时重绘图表
+    window.addEventListener('resize', function() {
+        const charts = document.querySelectorAll('.chart');
+        charts.forEach(chart => {
+            echarts.getInstanceByDom(chart)?.resize();
+        });
+    });
+</script>
+</body>
+</html>
+
+

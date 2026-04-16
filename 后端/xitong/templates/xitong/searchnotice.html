@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>搜索公告</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap"
+          rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="/static/qianduan/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/qianduan/css/css.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-store mr-2"></i>现代化商城</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            {% include "xitong/qtmenu.html" %}
+        </div>
+    </div>
+</nav>
+<div class="banner">
+    <div class="container">
+        <h1 qw-c="operationname">搜索公告</h1>
+        <p>为您找到最适合的商品</p>
+    </div>
+</div>
+<div class="container mt-5">
+    <form action="sousuonotice" class="search-form mb-5" id="searchform" method="post" qw-c="searchform">
+        <div class="input-group">
+            <input type="text" class="form-control" id="search" placeholder="请输入搜索条件" name="search">
+            <div class="input-group-append">
+                <button class="btn btn-primary" id="searchbtn" type="submit">搜索</button>
+            </div>
+        </div>
+    </form>
+    <div qw-c="imagearea" qw-areaitemnum="6">
+        <h2 class="mb-4" qw-c="operationname">搜索公告</h2>
+        <div class="row" id="allitems">
+
+            {% for item in noticeall %}
+                <div class="col-md-4 mb-4 spitem oneitem" qw-c="entity">
+                    <div class="card">
+                        <img src="/static/upload/{{ item.pic }}" class="card-img-top" alt="商品图片" qw-c="entityimage">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title" qw-c="entitytitle">{{ item.name }}</h5>
+                            <p class="card-text flex-grow-1">精致设计，彰显品味</p>
+                            <a href="/notice/noticedetails/{{ item.id }}" class="btn btn-primary mt-auto">查看详情</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination" qw-c="paging" id="barcon" style="text-align: center;">
+            <li class="page-item"><a class="page-link" href="#" id="shangyiye" aria-label="Previous"> <span
+                    aria-hidden="true">«</span> </a></li>
+            <li class="page-item active"><a class="page-link" href="#" id="dangqianye">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#" id="xiayiye" aria-label="Next"> <span
+                    aria-hidden="true">»</span> </a></li>
+        </ul>
+    </nav>
+</div>
+<footer class="footer">
+    <div class="container text-center">
+        <span>© 2023 现代化商城. 保留所有权利。</span>
+    </div>
+</footer>
+<script src="/static/qianduan/js/jquery-3.5.1.slim.min.js"></script>
+<script src="/static/qianduan/js/popper.min.js"></script>
+<script src="/static/qianduan/js/bootstrap.min.js"></script>
+<script src="/static/qianduan/js/JavaScript-qd.js" type="text/javascript"></script>
+<script>
+    function goPage(pno, psize) {
+        var itable = document.getElementById("allitems");
+        console.log(itable);
+        var num = $("#allitems .oneitem").length;//表格所有行数(所有记录数)
+        console.log(num);
+        var totalPage = 0;//总页数
+        var pageSize = psize;//每页显示行数
+        //总共分几页
+        if (num / pageSize > parseInt(num / pageSize)) {
+            totalPage = parseInt(num / pageSize) + 1;
+        } else {
+            totalPage = parseInt(num / pageSize);
+        }
+        var currentPage = pno;//当前页数
+        var startRow = (currentPage - 1) * pageSize + 1;//开始显示的行 31
+        var endRow = currentPage * pageSize;//结束显示的行  40
+        endRow = (endRow > num) ? num : endRow; //40
+        console.log(endRow);
+        //遍历显示数据实现分页
+        for (var i = 1; i < (num + 1); i++) {
+            if (i >= startRow && i <= endRow) {
+                console.log($("#allitems .oneitem")[i - 1]);
+                $("#allitems .oneitem")[i - 1].style.display = "block";
+            } else {
+                $("#allitems .oneitem")[i - 1].style.display = "none";
+            }
+        }
+        var tempStr = "共 " + num + " 条记录 分 " + totalPage
+            + " 页 当前第 <span style=\"color:red;font-weight:bold;\">"
+            + currentPage + "</span> 页<br/>";
+        if (currentPage > 1) {
+            $("#shangyiye").off("click");
+            $("#shangyiye").click(function () {
+                goPage(currentPage - 1, psize)
+            });
+            //tempStr += "<a href=\"#\" onClick=\"goPage("+(1)+","+psize+")\">首页</a>";
+            //tempStr += "<a href=\"#\" onClick=\"goPage("+(currentPage-1)+","+psize+")\"><上一页</a>"
+        } else {
+            $("#shangyiye").off("click");
+            //tempStr += "<a href='#'>首页</a>";
+            //tempStr += "<a href='#'><上一页</a>";
+        }
+        if (currentPage < totalPage) {
+            $("#xiayiye").off("click");
+            $("#xiayiye").click(function () {
+                goPage(currentPage + 1, psize)
+            });
+            //tempStr += "<a href=\"#\" onClick=\"goPage("+(currentPage+1)+","+psize+")\">下一页></a>";
+            //tempStr += "<a href=\"#\" onClick=\"goPage("+(totalPage)+","+psize+")\">尾页</a>";
+        } else {
+            $("#xiayiye").off("click");
+            //tempStr += "<a href='#'>下一页></a>";
+            //tempStr += "<a href='#'>尾页</a>";
+        }
+        try {
+            document.getElementById("barcon").innerHTML = tempStr;
+        } catch (error) {
+
+        }
+        $("#dangqianye").html(currentPage);
+    }
+
+    goPage(1, 6);
+
+    if ("") {
+        alert("");
+    }
+
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>公告详情</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap"
+          rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="/static/qianduan/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/qianduan/css/css.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+        <a class="navbar-brand" href="#"><i class="fas fa-store mr-2"></i>现代化商城</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
+                class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            {% include "xitong/qtmenu.html" %}
+        </div>
+    </div>
+</nav>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="product-image">
+
+
+                <!--  使用img展示公告的图片  -->
+                <img src="/static/upload/{{ notice.pic }}" alt="商品图片" class="img-fluid" qw-c="entityimage">
+
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h1 class="product-title mb-3" qw-c="entitytitle">{{ notice.name }}</h1>
+            <p class="product-price mb-4">¥1,999</p>
+            <p class="product-description mb-4" qw-c="entitycontent">
+                这款智能手表采用最新科技，集成了多种功能，包括心率监测、运动追踪、睡眠分析等。它拥有出色的电池续航能力，时尚的外观设计，是您日常生活的完美搭档。</p>
+            <div class="d-flex mb-4">
+                <button class="btn btn-primary mr-3"><i class="fas fa-shopping-cart mr-2"></i>加入购物车</button>
+                <button class="btn btn-outline-primary"><i class="far fa-heart mr-2"></i>收藏</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 评论列表 -->
+<div class="container mt-4 comment-list">
+    <h2>评论列表</h2>
+    <div class="list-group">
+        <div class="list-group-item">
+            <h5 class="mb-1">用户1</h5>
+            <p class="mb-1">这是用户1的评论内容。</p>
+        </div>
+        <div class="list-group-item">
+            <h5 class="mb-1">用户2</h5>
+            <p class="mb-1">这是用户2的评论内容。</p>
+        </div>
+        <!-- 可以根据需要添加更多评论项 -->
+    </div>
+</div>
+<!-- 评论输入框 -->
+<div class="container mt-4">
+    <h2>发表评论</h2>
+    <form>
+        <div class="form-group">
+            <label for="commentInput">评论内容</label>
+            <textarea class="form-control" id="commentInput" rows="3" placeholder="请输入您的评论..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">提交评论</button>
+    </form>
+</div>
+<footer class="footer">
+    <div class="container text-center">
+        <span>© 2023 现代化商城. 保留所有权利。</span>
+    </div>
+</footer>
+<!--底部版权部分结束-->
+<script src="/static/qianduan/js/jquery-3.5.1.slim.min.js"></script>
+<script src="/static/qianduan/js/popper.min.js"></script>
+<script src="/static/qianduan/js/bootstrap.min.js"></script>
+<script>
+    if ("") {
+        alert("");
+    }
+</script>
+</body>
+</html>
+
+

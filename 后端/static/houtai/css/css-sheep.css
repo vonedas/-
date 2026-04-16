@@ -1,0 +1,18 @@
+.form-control-ipt{
+    width: 200px;
+    float: left;
+    margin-left: 10px;
+}
+.left-ipt{
+    float: left;
+    line-height: 40px;
+    margin-left: 30px;
+}
+
+.form-search{
+    text-align: left;width:90%;margin-top: 30px;margin-bottom: 50px;
+}
+
+.form-search button{
+    float: left;margin-left: 30px;
+}

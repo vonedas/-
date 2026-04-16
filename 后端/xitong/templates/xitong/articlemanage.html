@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <title qw-c="operationname">文章管理</title>
+    <!-- Favicon icon -->
+    <!-- Custom Stylesheet -->
+    <link href="/static/houtai/static/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="/static/houtai/static/css/style.css" rel="stylesheet">
+    <link href="https://www.17sucai.com/table-bootstrap-basic.html" rel="canonical">
+    <link href="/static/houtai/css/css-sheep.css" rel="stylesheet" type="text/css">
+    <style>
+        .table-responsive { margin-top: 20px; }
+        .table { background: #fff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .table thead { background: #f8f9fa; }
+        .table thead td { font-weight: 600; color: #344767; padding: 16px; border-bottom: 1px solid #eee; }
+        .table tbody td { padding: 16px; vertical-align: middle; border-bottom: 1px solid #eee; color: #344767; }
+        .table tbody tr:hover { background: #f8f9fa; }
+        .user-img { width: 80px; height: 60px; border-radius: 8px; object-fit: cover; }
+        .action-btn-group { display: flex; flex-wrap: nowrap; gap: 8px; align-items: center; }
+        .btn-action { padding: 6px 12px; border-radius: 4px; font-size: 13px; margin-right: 0; white-space: nowrap; min-width: 56px; max-width: 90px; text-align: center; flex-shrink: 0; transition: all 0.2s; }
+        .btn-edit { background: #6B8DE3; color: #fff; border: none; }
+        .btn-edit:hover { background: #5A7CD2; color: #fff; }
+        .btn-delete { background: #dc3545; color: #fff; border: none; }
+        .btn-delete:hover { background: #bb2d3b; color: #fff; }
+        .btn-detail { background: #198754; color: #fff; border: none; }
+        .btn-detail:hover { background: #157347; color: #fff; }
+        .btn-reco { background: #198754; color: #fff; border: none; }
+        .btn-reco:hover { background: #157347; color: #fff; }
+        .btn-unreco { background: #6c757d; color: #fff; border: none; }
+        .btn-unreco:hover { background: #495057; color: #fff; }
+        /* 弹窗样式 */
+        .modal-mask {
+            position: fixed; left: 0; top: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.35); z-index: 9999; display: none; align-items: center; justify-content: center;
+        }
+        .modal-box {
+            background: #fff; border-radius: 10px; max-width: 600px; width: 90vw; max-height: 70vh; box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+            padding: 24px 24px 16px 24px; position: relative; overflow: auto;
+        }
+        .modal-title { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: #344767; }
+        .modal-close {
+            position: absolute; right: 18px; top: 12px; font-size: 22px; color: #888; cursor: pointer; border: none; background: none;
+        }
+        .modal-content-html { font-size: 15px; color: #222; line-height: 1.7; word-break: break-all; }
+    </style>
+</head>
+<body>
+<!--*******************
+  Preloader start
+********************-->
+<div id="preloader">
+    <div class="sk-three-bounce">
+        <div class="sk-child sk-bounce1"></div>
+        <div class="sk-child sk-bounce2"></div>
+        <div class="sk-child sk-bounce3"></div>
+    </div>
+</div>
+<!--*******************
+  Preloader end
+********************-->
+<!--**********************************
+  Main wrapper start
+***********************************-->
+<div id="main-wrapper">
+    <!--**********************************
+                 Nav header start
+             ***********************************-->
+    <div class="nav-header">
+          <a class="brand-logo" href="#"> <span
+                style="color: white; font-size: 30px;margin-left: 45px;white-space: nowrap">健康检测系统</span> </a>
+        <div class="nav-control">
+            <div class="hamburger">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </div>
+    </div>
+    <!--**********************************
+                 Nav header end
+             ***********************************-->
+    <!--**********************************
+                 Header start
+             ***********************************-->
+    <div class="header">
+        <div class="header-content">
+            <nav class="navbar navbar-expand">
+                <div class="collapse navbar-collapse justify-content-between">
+                    <ul class="navbar-nav header-right">
+                        <li class="nav-item dropdown notification_dropdown"><a class="nav-link bell ai-icon"
+                                                                               data-toggle="dropdown" href="#"
+                                                                               role="button">
+                            <svg class="feather feather-bell" fill="none" height="20" id="icon-user"
+                                 stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                 viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
+                            </svg>
+                        </a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!--**********************************
+                 Header end ti-comment-alt
+             ***********************************-->
+    <!--**********************************
+                 Sidebar start
+             ***********************************-->
+    <div class="dlabnav">
+        <div class="dlabnav-scroll">
+
+            {% include "xitong/htmenu.html" %}
+
+        </div>
+    </div>
+    <!--**********************************
+                 Sidebar end
+             ***********************************-->
+    <!--**********************************
+                 Content body start
+             ***********************************-->
+    <div class="content-body">
+        <div class="container-fluid">
+            <div class="row page-titles mx-0">
+                <div class="col-sm-6 p-md-0">
+                    <div class="welcome-text">
+                        <h4 qw-c="operationname">文章管理</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title" qw-c="operationname">文章管理</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <form action="#" class="form-search" id="searchform" method="post">
+                                    <div class="row">
+                                        <span class="left-ipt">关键词</span>
+                                        <input class="form-control form-control-ipt" id="search">
+                                        <button class="btn btn-primary" id="searchbtn">搜索</button>
+                                    </div>
+                                </form>
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <td>标题</td>
+                                        <td>图片</td>
+                                        <td>发布时间</td>
+                                        <td>浏览量</td>
+                                        <td>文章分类</td>
+                                        <td>是否推荐</td>
+                                        <td>操作</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for article in articleall %}
+                                        <tr>
+                                            <td>{{ article.title | safe }}</td>
+                                            <td><img src="/static/upload/{{ article.pic }}" class="user-img"></td>
+                                            <td>{{ article.addtime | safe }}</td>
+                                            <td>{{ article.clicknum | safe }}</td>
+                                            <td>{{ article.articletype | safe }}</td>
+                                            <td>
+                                                {% if article.isreco == '是' %}
+                                                    <span style="color:#198754;font-weight:600;">是</span>
+                                                {% else %}
+                                                    <span style="color:#888;">否</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <div class="action-btn-group">
+                                                    <button type="button" class="btn-action btn-detail" onclick="showDetail(this)">详细</button>
+                                                    <a href="/article/updatearticle/{{ article.id }}" class="btn-action btn-edit">修改</a>
+                                                    <a href="/article/deletearticleact/{{ article.id }}" class="btn-action btn-delete">删除</a>
+                                                    {% if article.isreco == '是' %}
+                                                        <a href="/article/unrecoArticle/{{ article.id }}" class="btn-action btn-unreco" style="background:#6c757d;color:#fff;">取消推荐</a>
+                                                    {% else %}
+                                                        <a href="/article/recoArticle/{{ article.id }}" class="btn-action btn-reco" style="background:#198754;color:#fff;">推荐</a>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="article-content-html" style="display:none;">{{ article.content|safe }}</div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div style="margin-top: 30px;text-align: right">
+                                    <div id="tempStr1"></div>
+                                    <div style="line-height: 70px;height:70px;">
+                                        <a class="btn btn-primary" href="#" id="shangyiye">上一页</a>
+                                        <a class="btn btn-primary" href="#" id="dangqianye">1</a>
+                                        <a class="btn btn-primary" href="#" id="xiayiye">下一页</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--**********************************
+                 Content body end
+             ***********************************-->
+    <div class="footer">
+        <div class="copyright">
+            <p>健康检测系统</p>
+        </div>
+    </div>
+</div>
+<!--**********************************
+  Main wrapper end
+***********************************-->
+<!--**********************************
+  Scripts
+***********************************-->
+<!-- Required vendors -->
+<script src="/static/houtai/static/js/global.min.js"></script>
+<script src="/static/houtai/static/js/bootstrap-select.min.js"></script>
+<script src="/static/houtai/static/js/custom.min.js"></script>
+<script src="/static/houtai/static/js/dlabnav-init.js"></script>
+<!-- Svganimation scripts -->
+<script src="/static/houtai/static/js/vivus.min.js"></script>
+<script src="/static/houtai/static/js/svg.animation.js"></script>
+<script src="/static/houtai/static/js/styleSwitcher.js"></script>
+<script src="/static/houtai/js/JavaScript-js.js" type="text/javascript"></script>
+<script>
+    if ("") {
+        alert("");
+    }
+    function showDetail(btn) {
+        var html = btn.parentNode.parentNode.querySelector('.article-content-html').innerHTML;
+        var modal = document.getElementById('modal-mask');
+        document.getElementById('modal-content-html').innerHTML = html;
+        modal.style.display = 'flex';
+    }
+    function closeModal() {
+        document.getElementById('modal-mask').style.display = 'none';
+        document.getElementById('modal-content-html').innerHTML = '';
+    }
+</script>
+<div class="modal-mask" id="modal-mask">
+    <div class="modal-box">
+        <button class="modal-close" onclick="closeModal()">×</button>
+        <div class="modal-title">文章内容详情</div>
+        <div class="modal-content-html" id="modal-content-html"></div>
+    </div>
+</div>
+</body>
+</html>
+
+
